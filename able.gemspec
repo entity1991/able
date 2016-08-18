@@ -9,10 +9,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ["entity"]
   spec.email         = ["ruslankuzma@gmail.com"]
 
-  spec.summary       = %q{Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{Write a longer description or delete this line.}
-  # spec.homepage      = "TODO: Put your gem's website or public repo URL here."
-  spec.license       = "MIT"
+  spec.summary       = %q{Simple helpers for active record models}
+  spec.description   = %q{Here you can find some concern methods you use almost in each one project. }
+  spec.homepage      = 'https://github.com/entity1991/able'
+  spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
