@@ -1,6 +1,6 @@
 # Able
 
-This gem helps you to start develop new app simple. See usage instructions
+This gem contains pieces of code I copy-past from one project to another one.
 
 ## Installation
 
@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
+###Concerns
+
 1. [Emailable](https://github.com/entity1991/able/tree/master/lib/able/emailable.rb)
 2. [Fullnameable](https://github.com/entity1991/able/tree/master/lib/able/fullnameable.rb)
     `full_name` method
@@ -32,6 +34,12 @@ Or install it yourself as:
     generate_uuid!
   end
 ```  
+
+### Ruby class extensions
+
+1. [Integer](https://github.com/entity1991/able/tree/master/lib/ext/integer.rb)
+1. [Kernel](https://github.com/entity1991/able/tree/master/lib/ext/kernel.rb)
+1. [String](https://github.com/entity1991/able/tree/master/lib/ext/string.rb)
 
 ## Contributing
 
