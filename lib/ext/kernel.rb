@@ -23,17 +23,20 @@ module Kernel
   end
 
   # Is good for rake tasks, migrations etc.
-  def each_with_progress(collection)
+  def each_with_progress(collection, sql_logging: false, batch: true)
     progress = 0
 
     all_count = collection.count
     puts_with_time "Found before: #{all_count} items."
     i = 0
 
-    collection.find_each(batch_size: 1000) do |item|
-      yield item
+    unless sql_logging
+      old_logger = ActiveRecord::Base.logger
+      ActiveRecord::Base.logger = nil
+    end
 
-      i = i + 1
+    iterator_proc = Proc.new do |item|
+      yield item, i
 
       current_progress = ((i * 100) / all_count.to_f).floor
       if current_progress > progress
@@ -41,6 +44,15 @@ module Kernel
         puts_with_time "Done #{progress}%. #{i} of #{all_count} records."
       end
 
+      i = i + 1
+    end
+
+    batch ?
+        collection.find_each(batch_size: 1000) { |item| iterator_proc.call(item) } :
+        collection.each { |item| iterator_proc.call(item) }
+
+    unless sql_logging
+      ActiveRecord::Base.logger = old_logger
     end
 
     puts_with_time "Left after: #{collection.count} items."
