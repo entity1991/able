@@ -47,7 +47,7 @@ module Kernel
       i = i + 1
     end
 
-    batch ?
+    batch && collection.class.superclass.to_s == 'ActiveRecord::Relation' ?
         collection.find_each(batch_size: 1000) { |item| iterator_proc.call(item) } :
         collection.each { |item| iterator_proc.call(item) }
 
@@ -56,6 +56,10 @@ module Kernel
     end
 
     puts_with_time "Left after: #{collection.count} items."
+
+  rescue => e
+    ActiveRecord::Base.logger = old_logger if old_logger
+    raise e
   end
 
   def puts_with_time(string)
